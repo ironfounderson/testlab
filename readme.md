@@ -117,3 +117,17 @@ Have an example where fakes should be used. Assignment is to change the code to 
 - Protocol
 
 Subset of XMPP
+
+Chat client
+
+The protocol needs to be very simple.
+
+There is a helper class available that can:
+- send messages to the server
+- receive messages from the server and pass them on to the client
+- messages are sent and received asynchronously
+- to the assignment is to build and test a state machine
+- test that the client works as expected when receiving messages
+- test that the client properly encodes the message before passing them on to the helper
+- the helper will just pass happily along any message
+- the helper will also pass along any message from the server to the client

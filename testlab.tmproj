@@ -2,15 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>/Volumes/RobHD/code/python/testlab/readme.MD</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>readme.MD</string>
 			<key>lastUsed</key>
-			<date>2010-12-26T11:12:57Z</date>
+			<date>2010-12-26T15:34:35Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
@@ -18,26 +16,7 @@
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
-	<dict>
-		<key>/Volumes/RobHD/code/python/testlab/readme.MD</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>28</integer>
-				<key>line</key>
-				<integer>86</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>73</integer>
-		</dict>
-	</dict>
-	<key>openDocuments</key>
-	<array>
-		<string>/Volumes/RobHD/code/python/testlab/readme.MD</string>
-	</array>
+	<dict/>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>

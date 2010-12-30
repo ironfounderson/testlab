@@ -67,6 +67,15 @@ class ChatClientSendTests(unittest.TestCase):
         self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
     
+    def test_set_status_using_mock(self):
+        """set_status calls our mock with a properly encoded message"""
+        # Act
+        self.chat_client.set_status('away')
+        # Assert
+        expected_message = {'command':'set-status', 'value':'away'}
+        self.assertEquals(expected_message,
+                          self.chat_service_mock.sent_message)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -40,12 +40,12 @@ class ChatClient(object):
         super(ChatClient, self).__init__()
         self.chat_service = chat_service
         self.chat_service.callback = self
-        
+    
     def login(self, user, password):
         """Sends a properly encoded login message to the chat_service"""
         message = {'command':'login', 'user':user, 'password':password}
         self.chat_service.send(message)
-        
+    
     def logout(self):
         """Sends a properly encoded logout message to the chat_service"""
         message = {'command':'logout'}
@@ -61,25 +61,24 @@ class ChatClient(object):
         message = {'command':'send-friend-request', 'to':user_id}
         self.chat_service.send(message)        
     
-    def set_current_status(self, status):
+    def set_status(self, status):
         """sets the current status of the current user"""
         pass
     
-        
     def get_friend_list(self):
         """returns a list of all the friends of the current logged in user"""
         pass
-        
-    def get_current_status(self):
+    
+    def get_status(self):
         """returns the current status of the current user"""
         pass
-        
+    
     def get_messages(self):
         """returns a list of all the messages received since 
             the last time this method was called"""
         pass
-        
+    
     def response(self, message):
         """handles the callback from the chat_service"""
         pass
-
+    

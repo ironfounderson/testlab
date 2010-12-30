@@ -50,17 +50,17 @@ class ChatClient(object):
         """Sends a properly encoded logout message to the chat_service"""
         message = {'command':'logout'}
         self.chat_service.send(message)        
-        
+    
     def send_message(self, user_id, message):
         """sends a message to the user with user_id"""
         message = {'command':'send-message', 'to':user_id, 'message':message}
         self.chat_service.send(message)        
     
-        
     def send_friend_request(self, user_id):
         """sends a friend request to the user with user_id"""
-        pass
-        
+        message = {'command':'send-friend-request', 'to':user_id}
+        self.chat_service.send(message)        
+    
     def set_current_status(self, status):
         """sets the current status of the current user"""
         pass

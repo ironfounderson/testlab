@@ -33,6 +33,7 @@ class ChatClientTests(unittest.TestCase):
         expected_message = {'command':'login', 
                             'user':'user-name', 'password':'passw0rd'}
         self.assertEquals(expected_message, chat_service_mock.sent_message)
+    
 
     def test_logout_using_mock(self):
         """logout calls our mock with a properly encoded message"""
@@ -44,6 +45,19 @@ class ChatClientTests(unittest.TestCase):
         # Assert
         expected_message = {'command':'logout'} 
         self.assertEquals(expected_message, chat_service_mock.sent_message)
-        
+    
+
+    def test_send_message_using_mock(self):
+        """send_message calls our mock with a properly encoded message"""
+        # Arrange
+        chat_service_mock = ChatServiceMock()
+        chat_client = ChatClient(chat_service_mock)
+        # Act
+        chat_client.send_message('user123', 'Hello')
+        # Assert
+        expected_message = {'command':'send-message', 'to':'user123', 'message':'Hello'} 
+        self.assertEquals(expected_message, chat_service_mock.sent_message)
+    
+
 if __name__ == '__main__':
     unittest.main()

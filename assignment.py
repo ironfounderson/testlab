@@ -47,8 +47,9 @@ class ChatClient(object):
         self.chat_service.send(message)
         
     def logout(self):
-        """docstring for logout"""
-        pass
+        """Sends a properly encoded logout message to the chat_service"""
+        message = {'command':'logout'}
+        self.chat_service.send(message)        
         
     def send_message(self, user_id, message):
         """sends a message to the user with user_id"""

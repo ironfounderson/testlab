@@ -53,7 +53,9 @@ class ChatClient(object):
         
     def send_message(self, user_id, message):
         """sends a message to the user with user_id"""
-        pass
+        message = {'command':'send-message', 'to':user_id, 'message':message}
+        self.chat_service.send(message)        
+    
         
     def send_friend_request(self, user_id):
         """sends a friend request to the user with user_id"""

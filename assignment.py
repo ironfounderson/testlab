@@ -43,7 +43,8 @@ class ChatClient(object):
         
     def login(self, user, password):
         """Sends a properly encoded login message to the chat_service"""
-        pass
+        message = {'command':'login', 'user':user, 'password':password}
+        self.chat_service.send(message)
         
     def logout(self):
         """docstring for logout"""

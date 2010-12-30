@@ -8,24 +8,14 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 """
 
 import unittest
-from mock import Mock
-from assignment import *
+from assignment import ChatClient
 
-class ClientHelperMock(object):
-	def send(self, message):
-		self.sent_message = message
-	
-class TalkClientTests(unittest.TestCase):
-	def setUp(self):
-		pass
-		
-	def test_login(self):
-		helper = ClientHelperMock()
-		talkClient = TalkClient(helper)
-		talkClient.login('demouser', 'password')
-		self.assertEquals({'command':'login','user':'demouser','password':'password'}, helper.sent_message)
-
-
+class ChatClientTests(unittest.TestCase):
+    """Tests for implementing the chat client"""
     
+    def test(self):
+        """ """
+        pass
+        
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()

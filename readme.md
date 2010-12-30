@@ -123,11 +123,190 @@ Chat client
 The protocol needs to be very simple.
 
 There is a helper class available that can:
-- send messages to the server
-- receive messages from the server and pass them on to the client
-- messages are sent and received asynchronously
-- to the assignment is to build and test a state machine
-- test that the client works as expected when receiving messages
-- test that the client properly encodes the message before passing them on to the helper
-- the helper will just pass happily along any message
-- the helper will also pass along any message from the server to the client
+
+* send messages to the server
+* receive messages from the server and pass them on to the client
+* messages are sent and received asynchronously
+* the assignment is to build and test a state machine
+* test that the client works as expected when receiving messages
+* test that the client properly encodes the message before passing them on to the helper
+* the helper will just pass happily along any message
+* the helper will also pass along any message from the server to the client
+
+
+`def test_login_helper_gets_correct_command(self):`
+
+### Chat use cases
+
+Log on to server
+
+Log off from server
+
+Send message to existing user
+
+Send message to non existing user
+
+Receive message from user in friend list
+
+Receive message from user not in friend list
+
+Request friend list from server
+
+Get rejected from server when logging on
+
+Get disconnected from server
+
+Receive notification that a user in friend list has changed status
+
+Friend status = online, offline, (away)
+
+Send friend request
+
+Receive friend request
+
+Sent friend request gets rejected
+
+Sent friend request gets accepted
+
+Accept incoming friend request
+
+Reject incoming friend request
+
+Send message to user of different status
+
+Change your own status
+
+Receive message when you are away
+
+Messages received when away should be queued and displayed when becoming online? You have X messages.
+
+
+
+The assignment is to write a `TalkClient` class using TDD. There are some helper classes available. All communication to and from the server is done via a `ClientService` class. The `ClientService` class has a `send` method and invokes a `receive` method on the `TalkClient` for all communication.
+
+The assignment is to create a new class to facilitate the interaction with the chat service. Today the API is very sparse. It's one class that has one method `send` and uses a callback to report responses and incoming messages and requests. Actually, it is a bit more complex but for the purpose of this assignment that is what is important.
+
+    class ChatService(object):
+      def __init__(self, callback):
+        super(ChatService, self).__init__()
+        self.callback = callback
+        
+      def send(self, message):
+        """sends a message to the server"""
+        pass
+
+    class SimplifiedChatClient(object):
+      def __init__(self):
+          super(SimplifiedChatClient, self).__init__()
+          self.chat_service = ChatService(self)
+
+      def response(self, message):
+          """invoked from chat_service when there is a response or message 
+              from the server"""
+          print message
+
+      def send(self, message):
+          """passes on the message to the chat_service"""
+          self.chat_service(message)
+
+What is needed is a new `ChatClient` which has a better API and meets the following requirements:
+
+...list of requirements...
+
+
+
+
+
+
+
+Login
+
+What do we need to do to be able to login? 
+
+- login command, user, password
+- we need to make sure that with send the correct command
+to make is easy the commands are encoded as Python dictionaries
+{'command':'login', 'args':['username','password']}
+
+The responses we get from `ClientService` are also delivered as Python dictionaries. If a response contains a key exception with a non-nil value then there was a "serious" error trying to deliver the command. Serious as the server can't be reached. All commands are listed together with the possible responses. The `ClientService` handles the underlying stuff of appending the token/cookie for the session.
+
+The communication is done asynchronously which means that responses can come at "unexpected times". This means that the first response that comes from a 'send-message' command could very well be a message from another user.
+
+The responsibilities of the `TalkClient` class are:
+
+    login(user, password)
+    logout()
+    send_message(user_id, message)
+    send_friend_request(user_id)
+    get_friend_list()
+    get_messages()
+    get_current_status()
+
+The talk client does not need to update any "user" of status changes etc. The "user" will query `TalkClient` using the above API
+
+# Commands
+
+## Possible responses to all commands
+
+connection error:
+{'response-to-command':'command-name','exception':'connection error'}
+
+client not logged on:
+{'response-to-command':'command-name','exception':'unknown client'}
+
+## Login
+Sent when the client want to login to the chat server.
+
+{'command':'login',...}
+
+### Possible responses
+login ok:
+{'response-to-command':'login','value':'ok'}
+
+login failed:
+{'response-to-command':'login','value':'failed'}
+
+## Logoff
+{'command':'logoff'}
+
+### Possible responses
+logoff ok:
+{'response-to-command':'logoff','value':'ok'}
+
+logoff failed: (user has not previously logged in)
+{'response-to-command':'logoff','value':'failed'}
+
+## Request friend list
+
+{'command':'friend-list'}
+
+### Possible responses
+{'response-to-command':'friend-list','value':[{'name':'','id':'','status':''},...]}
+
+## Send message
+
+{'command':'send-message','to':'user-id','message':'message-text'}
+
+### Possible responses
+Message sent successfully:
+{'response-to-command':'send-message','value':'ok'}
+
+Message failed to be delivered:
+{'response-to-command':'send-message','value':'failed'}
+
+
+
+# Responses that can come at any time
+
+## Friend status change
+A status change message is sent when a user has changed their status as well as their name
+{'response':'friend-status-change','value':{'name':'current-name','id':'id','status':'new-status'}}
+
+## Message from user
+{'response':'message','from':{'name':'user-name','id':'user-id'},'message':'message-text'}
+
+## Friend request from user
+{'response':'friend-request','from':{'name':'user-name','id':'user-id'},'message':'message-text'}
+
+
+

@@ -10,25 +10,72 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 import sys
 import os
 
-class TalkClient(object):
-	
-	"""docstring for TalkClient"""
-	def __init__(self, helper):
-		super(TalkClient, self).__init__()
-		self.helper = helper
+class ChatService(object):
+    def __init__(self, callback):
+        super(ChatService, self).__init__()
+        self.callback = callback
+        
+    def send(self, message):
+        """sends a message to the server"""
+        pass
+        
+class SimplifiedChatClient(object):
+    """Simplified ChatClient"""
+    def __init__(self):
+        super(SimplifiedChatClient, self).__init__()
+        self.chat_service = ChatService(self)
+        
+    def response(self, message):
+        """invoked from chat_service when there is a response or message 
+            from the server"""
+        print message
+        
+    def send(self, message):
+        """passes on the message to the chat_service"""
+        self.chat_service(message)
+        
+class ChatClient(object):
+    """docstring for ChatClient"""
+    def __init__(self, chat_service):
+        super(ChatClient, self).__init__()
+        self.chat_service = chat_service
+        self.chat_service.callback = self
+        
+    def login(self, user, password):
+        """docstring for login"""
+        pass
+        
+    def logout(self):
+        """docstring for logout"""
+        pass
+        
+    def send_message(self, user_id, message):
+        """sends a message to the user with user_id"""
+        pass
+        
+    def send_friend_request(self, user_id):
+        """sends a friend request to the user with user_id"""
+        pass
+        
+    def set_current_status(self, status):
+        """sets the current status of the current user"""
+        pass
+    
+        
+    def get_friend_list(self):
+        """returns a list of all the friends of the current logged in user"""
+        pass
+        
+    def get_current_status(self):
+        """returns the current status of the current user"""
+        pass
+        
+    def get_messages(self):
+        """returns a list of all the messages received since 
+            the last time this method was called"""
+        pass
+        
+    def response(self, message):
+        """handles the callback from the chat_service"""
+        pass
 
-	def send(self, message):
-		"""sends a message to the server"""
-		self.helper.send(message)
-	
-	def receive(self, message):
-		"""called when a message is received from the server"""
-		pass
-		
-	def timeout(self, message):
-		"""called when there was a timeout sending a message"""
-		pass
-		
-	def login(self, user, password):
-		message = {'command':'login','user':user,'password':password}
-		self.send(message)

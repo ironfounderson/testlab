@@ -217,6 +217,10 @@ What is needed is a new `ChatClient` which has a better API and meets the follow
 
 
 
+# Tests
+
+The first categories of tests that one can write is to make sure that the messages that will be sent to the server are encoded properly. This can be done in at least two ways. The `ChatClient` uses a `ChatService` that can be mocked and we can test against our mock to make sure that we get the correct message. 
+
 
 
 Login

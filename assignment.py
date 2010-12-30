@@ -42,7 +42,7 @@ class ChatClient(object):
         self.chat_service.callback = self
         
     def login(self, user, password):
-        """docstring for login"""
+        """Sends a properly encoded login message to the chat_service"""
         pass
         
     def logout(self):

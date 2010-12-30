@@ -10,13 +10,13 @@
 			<key>filename</key>
 			<string>assignment.py</string>
 			<key>lastUsed</key>
-			<date>2010-12-30T12:10:23Z</date>
+			<date>2010-12-30T13:51:47Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>assignment_tests.py</string>
 			<key>lastUsed</key>
-			<date>2010-12-30T12:10:23Z</date>
+			<date>2010-12-30T13:51:47Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
@@ -24,7 +24,7 @@
 			<key>filename</key>
 			<string>readme.MD</string>
 			<key>lastUsed</key>
-			<date>2010-12-30T12:08:17Z</date>
+			<date>2010-12-30T13:31:58Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -36,23 +36,23 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>41</integer>
+				<integer>8</integer>
 				<key>line</key>
-				<integer>41</integer>
+				<integer>46</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<key>assignment_tests.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>4</integer>
+				<integer>74</integer>
 				<key>line</key>
-				<integer>14</integer>
+				<integer>34</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -64,14 +64,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>312</integer>
 				<key>line</key>
-				<integer>198</integer>
+				<integer>221</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>164</integer>
+			<integer>239</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -83,6 +83,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{669, 129}, {1165, 1198}}</string>
+	<string>{{285, 151}, {1165, 1198}}</string>
 </dict>
 </plist>

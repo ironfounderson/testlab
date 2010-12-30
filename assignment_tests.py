@@ -38,7 +38,6 @@ class ChatClientSendTests(unittest.TestCase):
         self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
     
-
     def test_logout_using_mock(self):
         """logout calls our mock with a properly encoded message"""
         # Act
@@ -48,7 +47,6 @@ class ChatClientSendTests(unittest.TestCase):
         self.assertEquals(expected_message, 
                           self.chat_service_mock.sent_message)
     
-
     def test_send_message_using_mock(self):
         """send_message calls our mock with a properly encoded message"""
         # Act

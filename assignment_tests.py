@@ -58,6 +58,15 @@ class ChatClientSendTests(unittest.TestCase):
         self.assertEquals(expected_message, 
                           self.chat_service_mock.sent_message)
     
+    def test_send_friend_request_using_mock(self):
+        """send_friend_request calls our mock with a properly encoded message"""
+        # Act
+        self.chat_client.send_friend_request('user123')
+        # Assert
+        expected_message = {'command':'send-friend-request', 'to':'user123'}
+        self.assertEquals(expected_message,
+                          self.chat_service_mock.sent_message)
+    
 
 if __name__ == '__main__':
     unittest.main()

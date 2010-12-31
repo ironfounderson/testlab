@@ -56,5 +56,5 @@ class ChatClient(object):
     
     def response(self, message):
         """handles the callback from the chat_service"""
-        pass
+        self._status = 'online'
     

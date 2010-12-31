@@ -15,6 +15,7 @@ class ChatClient(object):
         self.chat_service.callback = self
         self._status = 'offline'
         self._friend_list = []
+        self._messages = []
     
     def login(self, user, password):
         """Sends a properly encoded login message to the chat_service"""
@@ -53,10 +54,15 @@ class ChatClient(object):
         """returns a list of all the messages received since
         the last time this method was called
         """
-        return []
+        return self._messages
     
     def response(self, message):
         """handles the callback from the chat_service"""
+        if 'response-to-command' in message:
+            self._response_to_command(message)
+    
+    def _response_to_command(self, message):
+        """handles messages that are responses to a sent command"""
         command_response = message['response-to-command']
         if command_response == 'login':
             self._status = 'online'

@@ -15,49 +15,49 @@ class ChatServiceMock(object):
     def __init__(self):
         super(ChatServiceMock, self).__init__()
         self.sent_message = None
-        
+
     def send(self, message):
         """saves the message for assert"""
         self.sent_message = message
-        
+
 class ChatClientSendTests(unittest.TestCase):
     """Tests checking that the send methods works as expected"""
-    
+
     def setUp(self):
         """set up a test case"""
         # Arrange
         self.chat_service_mock = ChatServiceMock()
         self.chat_client = ChatClient(self.chat_service_mock)
-    
+
     def test_login_using_mock(self):
         """login calls our mock with a properly encoded message"""
         # Act
         self.chat_client.login('user-name', 'passw0rd')
         # Assert
-        expected_message = {'command':'login', 
+        expected_message = {'command':'login',
                             'user':'user-name', 'password':'passw0rd'}
         self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
-    
+
     def test_logout_using_mock(self):
         """logout calls our mock with a properly encoded message"""
         # Act
         self.chat_client.logout()
         # Assert
-        expected_message = {'command':'logout'} 
-        self.assertEquals(expected_message, 
+        expected_message = {'command':'logout'}
+        self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
-    
+
     def test_send_message_using_mock(self):
         """send_message calls our mock with a properly encoded message"""
         # Act
         self.chat_client.send_message('user123', 'Hello')
         # Assert
-        expected_message = {'command':'send-message', 'to':'user123', 
-                            'message':'Hello'} 
-        self.assertEquals(expected_message, 
+        expected_message = {'command':'send-message', 'to':'user123',
+                            'message':'Hello'}
+        self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
-    
+
     def test_send_friend_request_using_mock(self):
         """send_friend_request calls our mock with a properly encoded message"""
         # Act
@@ -66,7 +66,7 @@ class ChatClientSendTests(unittest.TestCase):
         expected_message = {'command':'send-friend-request', 'to':'user123'}
         self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
-    
+
     def test_set_status_using_mock(self):
         """set_status calls our mock with a properly encoded message"""
         # Act
@@ -78,12 +78,12 @@ class ChatClientSendTests(unittest.TestCase):
 
 class ChatClientResponseTests(unittest.TestCase):
     """Tests checking that the response method works as expected."""
-    
+
     _response_login_ok = {'response-to-command':'login', 'response-code':'ok'}
     _response_logout_ok = {'response-to-command':'logout', 'response-code':'ok'}
-    _response_status_away = {'response-to-command':'set-status', 
+    _response_status_away = {'response-to-command':'set-status',
                              'response-code':'ok', 'value':'away'}
-    
+
     def test_get_status(self):
         """get_status returns offline when starting out"""
         # Arrange
@@ -92,9 +92,9 @@ class ChatClientResponseTests(unittest.TestCase):
         status = chat_client.get_status()
         # Assert
         self.assertEquals('offline', status)
-        
+
     def test_get_status_after_login(self):
-        """get_status returns online after receiving response 
+        """get_status returns online after receiving response
         from login command
         """
         # Arrange
@@ -104,9 +104,9 @@ class ChatClientResponseTests(unittest.TestCase):
         status = chat_client.get_status()
         # Assert
         self.assertEquals('online', status)
-    
+
     def test_get_status_after_logout(self):
-        """get_status returns offline after receiving response 
+        """get_status returns offline after receiving response
         from logout command
         """
         # Arrange
@@ -119,7 +119,7 @@ class ChatClientResponseTests(unittest.TestCase):
         self.assertEquals('offline', status)
 
     def test_get_status_after_set_status(self):
-        """get_status returns away after receiving response 
+        """get_status returns away after receiving response
         from set-status command
         """
         # Arrange
@@ -129,7 +129,18 @@ class ChatClientResponseTests(unittest.TestCase):
         status = chat_client.get_status()
         # Assert
         self.assertEquals('away', status)
-    
+
+    def test_get_friend_list(self):
+        """get_friend_list returns empty friend list"""
+         # Arrange
+        chat_client = self._create_chat_client()
+        # Act
+        friends = chat_client.get_friend_list()
+        # Assert
+        self.assertEquals([], friends)
+        
+
+
     def test_get_messages_empty_message_queue(self):
         """get_messages returns empty list when no messages
         have been received
@@ -140,7 +151,7 @@ class ChatClientResponseTests(unittest.TestCase):
         messages = chat_client.get_messages()
         # Assert
         self.assertEquals([], messages)
-    
+
     def _create_chat_client(self):
         """returns an instance of a ChatClient"""
         return ChatClient(ChatServiceMock())

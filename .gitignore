@@ -20,3 +20,5 @@ pip-log.txt
 
 # OS X
 .DS_Store
+
+.ropeproject

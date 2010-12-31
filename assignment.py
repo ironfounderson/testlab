@@ -42,7 +42,7 @@ class ChatClient(object):
     
     def get_friend_list(self):
         """returns a list of all the friends of the current logged in user"""
-        pass
+        return []
     
     def get_status(self):
         """returns the current status of the current user"""

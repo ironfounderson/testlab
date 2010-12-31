@@ -11,14 +11,14 @@
 			<string>assignment.py</string>
 			<key>lastUsed</key>
 			<date>2010-12-31T12:28:08Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>assignment_tests.py</string>
 			<key>lastUsed</key>
-			<date>2010-12-31T12:28:08Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2010-12-31T12:36:15Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -50,14 +50,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>11</integer>
+				<integer>37</integer>
 				<key>line</key>
-				<integer>133</integer>
+				<integer>139</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>74</integer>
+			<integer>79</integer>
 		</dict>
 		<key>readme.MD</key>
 		<dict>
@@ -81,8 +81,12 @@
 		<string>assignment.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
+	<false/>
+	<key>showFileHierarchyPanel</key>
 	<true/>
+	<key>treeState</key>
+	<dict/>
 	<key>windowFrame</key>
-	<string>{{247, 43}, {1168, 1358}}</string>
+	<string>{{247, 27}, {1348, 1374}}</string>
 </dict>
 </plist>

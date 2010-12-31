@@ -288,7 +288,7 @@ logoff failed: (user has not previously logged in)
 {'command':'friend-list'}
 
 ### Possible responses
-{'response-to-command':'friend-list','value':[{'name':'','id':'','status':''},...]}
+{'response-to-command':'friend-list','response-code':'ok', 'value':[{'name':'','id':'','status':''},...]}
 
 ## Send message
 
@@ -296,12 +296,20 @@ logoff failed: (user has not previously logged in)
 
 ### Possible responses
 Message sent successfully:
-{'response-to-command':'send-message','value':'ok'}
+{'response-to-command':'send-message','response-code':'ok'}
 
 Message failed to be delivered:
-{'response-to-command':'send-message','value':'failed'}
+{'response-to-command':'send-message','response-code':'failed'}
 
+## Set status
+Sent when the user want's to change her status
 
+{'command':'set-status', 'value':'new-status'}
+
+value: 'online', 'away'
+
+Other values return a response unknown value
+{'response-to-command':'set-status', 'response-code':'unknown-value'}
 
 # Responses that can come at any time
 

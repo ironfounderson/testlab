@@ -52,7 +52,7 @@ class ChatClient(object):
         """returns a list of all the messages received since
         the last time this method was called
         """
-        pass
+        return []
     
     def response(self, message):
         """handles the callback from the chat_service"""

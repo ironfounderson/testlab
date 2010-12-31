@@ -79,8 +79,10 @@ class ChatClientSendTests(unittest.TestCase):
 class ChatClientResponseTests(unittest.TestCase):
     """Tests checking that the response method works as expected."""
     
-    _response_login_ok = {'response-to-command':'login', 'value':'ok'}
-    _response_logout_ok = {'response-to-command':'logout', 'value':'ok'}
+    _response_login_ok = {'response-to-command':'login', 'response-code':'ok'}
+    _response_logout_ok = {'response-to-command':'logout', 'response-code':'ok'}
+    _response_status_away = {'response-to-command':'set-status', 
+                             'response-code':'ok', 'value':'away'}
     
     def test_get_status(self):
         """get_status returns offline when starting out"""
@@ -109,14 +111,25 @@ class ChatClientResponseTests(unittest.TestCase):
         """
         # Arrange
         chat_client = self._create_chat_client()
-        # Act
         chat_client.response(self._response_login_ok)
+        # Act
         chat_client.response(self._response_logout_ok)
         status = chat_client.get_status()
         # Assert
         self.assertEquals('offline', status)
 
-                
+    def test_get_status_after_set_status(self):
+        """get_status returns away after receiving response 
+        from set-status command
+        """
+        # Arrange
+        chat_client = self._create_chat_client()
+        # Act
+        chat_client.response(self._response_status_away)
+        status = chat_client.get_status()
+        # Assert
+        self.assertEquals('away', status)
+    
     def _create_chat_client(self):
         """returns an instance of a ChatClient"""
         return ChatClient(ChatServiceMock())

@@ -26,8 +26,10 @@ class SimplifiedChatClient(object):
         self.chat_service = ChatService(self)
     
     def response(self, message):
-        """invoked from chat_service when there is a response or message
-            from the server"""
+        """
+        invoked from chat_service when there is a response or message
+        from the server
+        """
         print message
     
     def send(self, message):
@@ -75,8 +77,10 @@ class ChatClient(object):
         pass
     
     def get_messages(self):
-        """returns a list of all the messages received since
-            the last time this method was called"""
+        """
+        returns a list of all the messages received since
+        the last time this method was called
+        """
         pass
     
     def response(self, message):

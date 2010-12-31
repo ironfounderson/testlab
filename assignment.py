@@ -14,6 +14,7 @@ class ChatClient(object):
         self.chat_service = chat_service
         self.chat_service.callback = self
         self._status = 'offline'
+        self._friend_list = []
     
     def login(self, user, password):
         """Sends a properly encoded login message to the chat_service"""
@@ -42,7 +43,7 @@ class ChatClient(object):
     
     def get_friend_list(self):
         """returns a list of all the friends of the current logged in user"""
-        return []
+        return self._friend_list
     
     def get_status(self):
         """returns the current status of the current user"""
@@ -63,3 +64,5 @@ class ChatClient(object):
             self._status = 'offline'
         elif command_response == 'set-status':
             self._status = message['value']
+        elif command_response == 'friend-list':
+            self._friend_list = message['value']

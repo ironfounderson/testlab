@@ -130,7 +130,7 @@ class ChatClientResponseTests(unittest.TestCase):
         # Assert
         self.assertEquals('away', status)
 
-    def test_get_friend_list(self):
+    def test_get_friend_list_empty_list(self):
         """get_friend_list returns empty friend list"""
          # Arrange
         chat_client = self._create_chat_client()
@@ -139,7 +139,19 @@ class ChatClientResponseTests(unittest.TestCase):
         # Assert
         self.assertEquals([], friends)
         
-
+    def test_get_friend_list_with_friends(self):
+        """get_friend_list returns received friends"""
+         # Arrange
+        chat_client = self._create_chat_client()
+        response = self._ok_response_for('friend-list')
+        friend = self._friend('afriend', 'online')
+        response['value'] = [friend]
+        chat_client.response(response)
+        # Act
+        friends = chat_client.get_friend_list()
+        a_friend = friends[0]
+        # Assert
+        self.assertEquals(a_friend, friend)
 
     def test_get_messages_empty_message_queue(self):
         """get_messages returns empty list when no messages
@@ -151,7 +163,13 @@ class ChatClientResponseTests(unittest.TestCase):
         messages = chat_client.get_messages()
         # Assert
         self.assertEquals([], messages)
+        
+    def _friend(self, name, status):
+        return {'name':name,'id':name + '-id','status':status}
 
+    def _ok_response_for(self, command):
+        return {'response-to-command':command, 'response-code':'ok'}
+        
     def _create_chat_client(self):
         """returns an instance of a ChatClient"""
         return ChatClient(ChatServiceMock())

@@ -56,5 +56,8 @@ class ChatClient(object):
     
     def response(self, message):
         """handles the callback from the chat_service"""
-        self._status = 'online'
-    
+        command_response = message['response-to-command']
+        if command_response == 'login':
+            self._status = 'online'
+        elif command_response == 'logoff':
+            self._status = 'offline'

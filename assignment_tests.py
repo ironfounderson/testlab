@@ -79,11 +79,6 @@ class ChatClientSendTests(unittest.TestCase):
 class ChatClientResponseTests(unittest.TestCase):
     """Tests checking that the response method works as expected."""
 
-    _response_login_ok = {'response-to-command':'login', 'response-code':'ok'}
-    _response_logout_ok = {'response-to-command':'logout', 'response-code':'ok'}
-    _response_status_away = {'response-to-command':'set-status',
-                             'response-code':'ok', 'value':'away'}
-
     def test_get_status(self):
         """get_status returns offline when starting out"""
         # Arrange
@@ -100,7 +95,7 @@ class ChatClientResponseTests(unittest.TestCase):
         # Arrange
         chat_client = self._create_chat_client()
         # Act
-        chat_client.response(self._response_login_ok)
+        chat_client.response(self._ok_response_for('login'))
         status = chat_client.get_status()
         # Assert
         self.assertEquals('online', status)
@@ -111,9 +106,9 @@ class ChatClientResponseTests(unittest.TestCase):
         """
         # Arrange
         chat_client = self._create_chat_client()
-        chat_client.response(self._response_login_ok)
+        chat_client.response(self._ok_response_for('login'))
         # Act
-        chat_client.response(self._response_logout_ok)
+        chat_client.response(self._ok_response_for('logout'))
         status = chat_client.get_status()
         # Assert
         self.assertEquals('offline', status)
@@ -125,7 +120,7 @@ class ChatClientResponseTests(unittest.TestCase):
         # Arrange
         chat_client = self._create_chat_client()
         # Act
-        chat_client.response(self._response_status_away)
+        chat_client.response(self._ok_response_with_value('set-status', 'away'))
         status = chat_client.get_status()
         # Assert
         self.assertEquals('away', status)
@@ -143,9 +138,8 @@ class ChatClientResponseTests(unittest.TestCase):
         """get_friend_list returns received friends"""
          # Arrange
         chat_client = self._create_chat_client()
-        response = self._ok_response_for('friend-list')
         friend = self._friend('afriend', 'online')
-        response['value'] = [friend]
+        response = self._ok_response_with_value('friend-list', [friend])
         chat_client.response(response)
         # Act
         friends = chat_client.get_friend_list()
@@ -169,6 +163,10 @@ class ChatClientResponseTests(unittest.TestCase):
 
     def _ok_response_for(self, command):
         return {'response-to-command':command, 'response-code':'ok'}
+
+    def _ok_response_with_value(self, command, value):
+        return {'response-to-command':command, 'response-code':'ok', 
+                'value':value}
         
     def _create_chat_client(self):
         """returns an instance of a ChatClient"""

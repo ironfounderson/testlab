@@ -66,3 +66,5 @@ class ChatClient(object):
             self._status = message['value']
         elif command_response == 'friend-list':
             self._friend_list = message['value']
+        else:
+            print 'Unknown command %s' % command_response

@@ -74,6 +74,20 @@ class ChatClientSendTests(unittest.TestCase):
         self.assertEquals(expected_message,
                           self.chat_service_mock.sent_message)
 
+class ChatClientResponseTests(unittest.TestCase):
+    """Tests checking that the response method works as expected."""
+    
+    def test_get_status(self):
+        """get_status returns offline when starting out"""
+        # Arrange
+        chat_client = self.create_chat_client()
+        # Act
+        status = chat_client.get_status()
+        # Assert
+        self.assertEquals('offline', status)
+        
+    def create_chat_client(self):
+        return ChatClient(ChatServiceMock())
 
 if __name__ == '__main__':
     unittest.main()

@@ -216,16 +216,13 @@ What is needed is a new `ChatClient` which has a better API and meets the follow
 
 
 
-
 # Tests
 
 The first categories of tests that one can write is to make sure that the messages that will be sent to the server are encoded properly. This can be done in at least two ways. The `ChatClient` uses a `ChatService` that can be mocked and we can test against our mock to make sure that we get the correct message. See `test_login_using_mock`. Another way would be to have a helper method encode the command and have the test make sure that the helper method works as expected. That was an easy test to write since we are not doing very much. Depending on if we want to test that the user and password supplied to the method are valid, non-empty string, we can write more tests. The `ChatService` will return an error message if the supplied credentials are wrong so we will leave out further tests for now.
 
 We need tests for the rest of our send commands so let's move on. `logout` is an easy test to write as well. And the implementation for the failing test is also easy to implement. Since I did basically copy-pasted my first test case to create the second I have a feeling that we can refactor the test case some. But I'm going to postpone that refactoring until we have written our next test, `send_message`. Again I did a copy-paste so let's refactor the test case a bit. I'm going to introduce two test classes, one for testing sending of messages using the mock and one for making sure `ChatClient` works as expected when receiving messages. Now the tests have been refactored to use `setUp` we can continue to `send_friend_request`. Another straight forward test. The last of these simple test is for `set_status` 
 
-After these tests we can continue to handle responses according to the specification. 
-
-
+After these tests we can continue to handle responses according to the specification. Let's start by tackling an easy problem, the response to the login command. What we want to test is that the status is updated accordingly after receiving a response to login.
 
 Login
 

@@ -87,6 +87,18 @@ class ChatClientResponseTests(unittest.TestCase):
         status = chat_client.get_status()
         # Assert
         self.assertEquals('offline', status)
+        
+    def test_get_status_after_login(self):
+        """get_status returns online after receiving response 
+        from login command
+        """
+        # Arrange
+        chat_client = self._create_chat_client()
+        # Act
+        chat_client.response({'response-to-command':'login', 'value':'ok'})
+        status = chat_client.get_status()
+        # Assert
+        self.assertEquals('online', status)
                 
     def _create_chat_client(self):
         """returns an instance of a ChatClient"""

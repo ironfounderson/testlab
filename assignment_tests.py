@@ -130,6 +130,17 @@ class ChatClientResponseTests(unittest.TestCase):
         # Assert
         self.assertEquals('away', status)
     
+    def test_get_messages_empty_message_queue(self):
+        """get_messages returns empty list when no messages
+        have been received
+        """
+        # Arrange
+        chat_client = self._create_chat_client()
+        # Act
+        messages = chat_client.get_messages()
+        # Assert
+        self.assertEquals([], messages)
+    
     def _create_chat_client(self):
         """returns an instance of a ChatClient"""
         return ChatClient(ChatServiceMock())

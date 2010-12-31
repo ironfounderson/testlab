@@ -17,6 +17,7 @@ class ChatServiceMock(object):
         self.sent_message = None
         
     def send(self, message):
+        """saves the message for assert"""
         self.sent_message = message
         
 class ChatClientSendTests(unittest.TestCase):
@@ -52,7 +53,8 @@ class ChatClientSendTests(unittest.TestCase):
         # Act
         self.chat_client.send_message('user123', 'Hello')
         # Assert
-        expected_message = {'command':'send-message', 'to':'user123', 'message':'Hello'} 
+        expected_message = {'command':'send-message', 'to':'user123', 
+                            'message':'Hello'} 
         self.assertEquals(expected_message, 
                           self.chat_service_mock.sent_message)
     
@@ -80,13 +82,14 @@ class ChatClientResponseTests(unittest.TestCase):
     def test_get_status(self):
         """get_status returns offline when starting out"""
         # Arrange
-        chat_client = self.create_chat_client()
+        chat_client = self._create_chat_client()
         # Act
         status = chat_client.get_status()
         # Assert
         self.assertEquals('offline', status)
-        
-    def create_chat_client(self):
+                
+    def _create_chat_client(self):
+        """returns an instance of a ChatClient"""
         return ChatClient(ChatServiceMock())
 
 if __name__ == '__main__':

@@ -61,3 +61,5 @@ class ChatClient(object):
             self._status = 'online'
         elif command_response == 'logout':
             self._status = 'offline'
+        elif command_response == 'set-status':
+            self._status = message['value']

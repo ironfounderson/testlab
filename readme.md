@@ -224,6 +224,8 @@ We need tests for the rest of our send commands so let's move on. `logout` is an
 
 After these tests we can continue to handle responses according to the specification. Let's start by tackling an easy problem, the response to the login command. What we want to test is that the status is updated accordingly after receiving a response to login.
 
+This is going to get messy but that is a good thing since with the tests you can actually refactor the code and make sure it still works. We are building a state machine and I'm not sure where we will end up.
+
 Login
 
 What do we need to do to be able to login? 

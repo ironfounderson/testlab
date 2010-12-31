@@ -59,5 +59,5 @@ class ChatClient(object):
         command_response = message['response-to-command']
         if command_response == 'login':
             self._status = 'online'
-        elif command_response == 'logoff':
+        elif command_response == 'logout':
             self._status = 'offline'

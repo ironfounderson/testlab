@@ -79,6 +79,9 @@ class ChatClientSendTests(unittest.TestCase):
 class ChatClientResponseTests(unittest.TestCase):
     """Tests checking that the response method works as expected."""
     
+    _response_login_ok = {'response-to-command':'login', 'value':'ok'}
+    _response_logout_ok = {'response-to-command':'logout', 'value':'ok'}
+    
     def test_get_status(self):
         """get_status returns offline when starting out"""
         # Arrange
@@ -95,20 +98,20 @@ class ChatClientResponseTests(unittest.TestCase):
         # Arrange
         chat_client = self._create_chat_client()
         # Act
-        chat_client.response({'response-to-command':'login', 'value':'ok'})
+        chat_client.response(self._response_login_ok)
         status = chat_client.get_status()
         # Assert
         self.assertEquals('online', status)
     
     def test_get_status_after_logout(self):
         """get_status returns offline after receiving response 
-        from logoff command
+        from logout command
         """
         # Arrange
         chat_client = self._create_chat_client()
         # Act
-        chat_client.response({'response-to-command':'login', 'value':'ok'})
-        chat_client.response({'response-to-command':'logoff', 'value':'ok'})
+        chat_client.response(self._response_login_ok)
+        chat_client.response(self._response_logout_ok)
         status = chat_client.get_status()
         # Assert
         self.assertEquals('offline', status)

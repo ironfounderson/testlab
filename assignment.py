@@ -6,7 +6,7 @@ assignment.py
 Created by Robert Höglund on 2010-12-26.
 Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 """
-
+        
 class ChatClient(object):
     """docstring for ChatClient"""
     def __init__(self, chat_service):
